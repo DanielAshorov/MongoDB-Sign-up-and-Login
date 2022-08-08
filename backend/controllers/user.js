@@ -39,12 +39,16 @@ exports.create = async (req, res) => {
           `
     });
 
-    res.status(201).json({ message: "Please verify your email. OTP has been sent to your email address!" });
+    res.status(201).json({ user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+    }, });
 };
 
 exports.verifyEmail = async (req, res) => {
     const { userId, OTP } = req.body;
-    if (!isValidObjectId(userId)) return res.json({ error: "Ivalid user!" });
+    if (!isValidObjectId(userId)) return res.json({ error: "Invalid user!" });
 
     const user = await User.findById(userId);
     if (!user) return sendError(res, "User not found!", 404);
@@ -73,8 +77,9 @@ exports.verifyEmail = async (req, res) => {
           <h1>Welcome to our movie review app!</h1>
           `,
     });
-
-    res.json({ message: "Your email is verified" });
+    const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    res.json({user: {id: user._id, name: user.name, email: user.email, token:jwtToken}, 
+    message: "Your account is verified" });
 
 };
 
