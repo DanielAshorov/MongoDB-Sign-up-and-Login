@@ -81,7 +81,7 @@ export default function EmailVerification() {
         if(!user) navigate("/not-found");
     }, [user]);
 
-    //if(!user) return null;
+    //if(!NavBar) return null;
 
     return (
         <FormContainer>

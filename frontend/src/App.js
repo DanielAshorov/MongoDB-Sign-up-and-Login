@@ -7,7 +7,7 @@ import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
-import Navbar from './components/user/Navbar';
+import Navbar from './components/NavBar/Navbar';
 
 export default function app() {
     return (<>

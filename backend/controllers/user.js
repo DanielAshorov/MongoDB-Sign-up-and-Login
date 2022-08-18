@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
 
     await newEmailVerificationToken.save();
 
-    // send that otp to our user
+    // send that otp to our NavBar
     var transport = generateMailTransporter();
 
     transport.sendMail({
@@ -48,7 +48,7 @@ exports.create = async (req, res) => {
 
 exports.verifyEmail = async (req, res) => {
     const { userId, OTP } = req.body;
-    if (!isValidObjectId(userId)) return res.json({ error: "Invalid user!" });
+    if (!isValidObjectId(userId)) return res.json({ error: "Invalid NavBar!" });
 
     const user = await User.findById(userId);
     if (!user) return sendError(res, "User not found!", 404);
@@ -103,7 +103,7 @@ exports.resendEmailVerificationToken = async (req, res) => {
 
     await newEmailVerificationToken.save();
 
-    // send that otp to our user
+    // send that otp to our NavBar
     var transport = generateMailTransporter();
 
     transport.sendMail({
